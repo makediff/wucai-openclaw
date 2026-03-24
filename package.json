@@ -1,0 +1,35 @@
+{
+  "name": "wucai-openclaw",
+  "version": "26.3.24",
+  "description": "让 AI 帮你保存和管理 五彩",
+  "license": "MIT-0",
+  "author": "makediff@gmail.com",
+  "homepage": "https://doc.wucai.site",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/makediff/wucai-openclaw.git"
+  },
+  "bugs": {
+    "url": "https://github.com/makediff/wucai-openclaw/issues"
+  },
+  "keywords": [
+    "wucai",
+    "五彩",
+    "highlight",
+    "notes",
+    "笔记",
+    "知识库",
+    "ai",
+    "openclaw",
+    "skill"
+  ],
+  "clawhub": {
+    "acceptLicenseTerms": true
+  },
+  "openclaw": {
+    "minVersion": "0.1.0",
+    "primaryEnv": "WUCAI_API_TOKEN",
+    "requires": {},
+    "optionalEnv": []
+  }
+}
