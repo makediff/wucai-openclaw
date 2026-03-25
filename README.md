@@ -13,7 +13,6 @@
 | :--- | :--- | :--- |
 | **📥 知识流管理** | `list_articles` | 分页浏览文章，支持 `inbox`, `later`, `archive` 状态流转。 |
 | **🔍 全局深度搜索** | `search_articles`, `search_highlights` | **双索引搜索**：精准定位文章标题、笔记内容或划线文本。 |
-| **📖 剪藏原文阅读** | `read_clipped_content` | **[特色]** 自动抓取并读取已剪藏文章的 Markdown 全文进行深度总结。 |
 | **✍️ 灵感随手记** | `append_diary`, `list_diary` | 快速向今日日记追加内容，或按日期范围回顾历史心路。 |
 | **♻️ 整理与维护** | `set_article_status`, `trash_article` | 灵活调整文章分类，或将无用信息移入废纸篓。 |
 | **📝 笔记增强** | `update_article_note` | 随时为文章补充新的阅读评价、感悟或 AI 生成的摘要。 |
