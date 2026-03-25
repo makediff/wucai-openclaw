@@ -1,105 +1,83 @@
 ---
-name: 五彩
+name: 五彩 (WuCai / WuCai Highlight)
 description: |
-  五彩 - 网页划线高亮批注和个人笔记和知识库管理工具。
+  管理网页划线、批注、全文剪藏和日记。
+  集成多区域 (CN/EU/US) 自动切换、15s 超时保护及中英文双语交互。
 
-  ## 核心能力
-
-  **1. 一键保存任意内容为笔记**
-  - 写一段话 → 直接保存为文本笔记
-  - 触发词：「记一下」「存到笔记」「帮我记录」
-metadata: {"openclaw": {"requires": {}, "optionalEnv": [], "primaryEnv": "WUCAI_API_TOKEN", "homepage": "https://doc.wucai.site", "homepage_en":"https://wucainote.com"}}
----
-
-# 五彩 API
-
-## ⚠️ 必读约束
-
-### 🌐 base url 是所有接口的前缀，所有 API 请求必须使用此 Base URL。
-
-```
-https://banana.wucai.site/apix/openapi/aiagent
-```
-
----
-
-### 🔑 首次安装配置
-
-### 配置方法：用户通过五彩后台复制 TOKEN
-
-让 AI Agent 为你自动完成授权：
-
-1. 告诉 Agent：「帮我配置 五彩」或「连接 五彩」
-2. Agent 会显示链接，让用户点击链接后复制TOKEN, 链接是 https://marker.dotalk.cn/#/personSetting/openapi
-3. 用户复制TOKEN后，返回 Agent 并粘贴 TOKEN
-4. Agent 将 TOKEN 写入环境变量 WUCAI_API_TOKEN
-
----
-
-### 🔒 安全规则
-
-- 笔记数据属于用户隐私，不在群聊中主动展示笔记内容
-- API 返回错误码 `10401` 时，引导开通会员：https://marker.dotalk.cn/#/personSetting/membership
-- 创建笔记建议间隔 1 分钟以上，避免触发限流
-
----
-
-## 认证
-
-请求头：
-- `Authorization: $WUCAI_API_TOKEN`
-- `X-Client-ID: 56` （固定值）
-
----
-
-## 请求方式和结果返回方式
-- 全部使用 POST 请求，请求格式为 JSON
-- "Content-Type" 为 `application/json`
-详细见 [references/api-details.md#请求格式和返回格式详细说明](references/api-details.md#请求格式和返回格式详细说明)
-
----
-
-## code 错误码列表
-详细见 [references/api-details.md#错误码表](references/api-details.md#错误码表)
-
----
-
-## 快速决策
-
-Base URL: `https://banana.wucai.site/apix/openapi/aiagent`
-
-| 用户意图 | 接口 | 关键点 |
-|---------|------|--------|
-| 「配置 五彩」「连接 五彩」 | 连接五彩 | 见「连接五彩」章节 |
-| 「记一下」「保存笔记」 | POST /demo | 同步返回 |
-
----
-
-## 核心功能：记笔记 & 查笔记
-- POST /demo , 记笔记接口
-
-## 连接五彩
-- 配置五彩需要 [五彩会员](https://marker.dotalk.cn/#/personSetting/membership) 才能使用 API
-- 显示连接链接，并提示用户打开后复制TOKEN, 链接是 https://marker.dotalk.cn/#/personSetting/openapi
-- 页面会提示用户复制一个 TOKEN, 这个 TOKEN 后续会作为 WUCAI_API_TOKEN
-- 在 `~/.openclaw/openclaw.json` 中添加：
-
-```json
-{
-  "skills": {
-    "entries": {
-      "wucai": {
-        "env": {
-          "WUCAI_API_TOKEN": "wucai_xxx"
-        }
+metadata:
+  {
+    'openclaw':
+      {
+        'requires':
+          {
+            'commands': ['python3', 'python'],
+            'files': ['scripts/wucai_api.py', 'scripts/read_clipped.py']
+          },
+        'optionalEnv':
+          [
+            {
+              'name': 'WUCAI_REGION',
+              'description': 'API 区域选择 (Region)：cn (Asia/China), eu (Europe), us (USA).',
+              'default': 'cn'
+            }
+          ],
+        'primaryEnv': 'WUCAI_API_TOKEN',
+        'homepage': 'https://doc.wucai.site',
+        'homepage_en': 'https://wucainote.com'
       }
-    }
   }
-}
-```
+---
 
-**告知用户**：
+# 五彩 API 执行规范 (WuCai Specification)
 
-> ✅ 五彩 配置完成！
-> 
-> - 现在可以使用「记一下」「查笔记」等功能了
+## 🚀 执行机制 (Execution Mechanism)
+
+**🚨 强制协议 (Mandatory Protocol)**: 本 Skill 采用“脚本代理”模式。**严禁直接使用 `curl`, `wget` 或内置网络请求库。** 所有 API 交互必须且只能通过执行 `scripts/` 目录下的 Python 脚本完成。
+
+- **调用规范 (Invocation)**:
+  1. **必须使用 `echo` 配合管道符 `|`** 将参数传递给脚本的 **stdin**，以规避 Shell 引号冲突与特殊字符解析错误。
+  2. **标准执行命令**: `echo '<params_json>' | python3 scripts/wucai_api.py <endpoint>`
+  3. **示例 (list_articles)**: `echo '{"range": "today"}' | python3 scripts/wucai_api.py list_articles`
+- **环境要求 (Environment)**:
+  - **脚本依赖**: 确保 `scripts/wucai_api.py` 和 `scripts/read_clipped.py` 位于正确路径。
+  - **自动处理**: 脚本将自动从系统读取 `$WUCAI_REGION` 和 `$WUCAI_API_TOKEN`，AI 无需在 JSON 参数中包含这些信息。
+  - **语言适配**: AI 必须根据 `$WUCAI_REGION` 决定回复语言：`cn` 使用中文，`eu/us` 使用 English。
+
+## 🛠️ 函数定义 (Functions)
+
+### 1. 列表与检索 (Discovery)
+
+- `list_articles(range='today', status='inbox', cursor='', page_size=12, with_highlights=false)`: 获取文章。`range` 可选: `today`/`48h`/`week`/`all`。
+- `list_diary(range='today', status='all', cursor='', page_size=12, with_highlights=false)`: 获取日记流。`with_highlights=true` 可在返回文章的同时直接包含对应的划线/日记内容。
+- `list_highlights(range='today', cursor='', page_size=12)`: 聚合查看最新划线。
+- `search_articles(query, cursor='', page_size=12)`: 搜索文章标题或笔记。
+- `search_highlights(query, cursor='', page_size=12)`: 跨文章搜索划线内容。
+
+### 2. 详情与内容 (Content Intelligence)
+
+- `get_article_details(note_idx='', url='')`: 获取单篇文章所有划线及元数据。
+- `read_clipped_content(clipp_url)`:
+  - **触发条件**: 当文章 `is_clipped` 为 `true` 时，调用此函数读取 Markdown 全文进行摘要。
+  - **执行指令**: `echo '{"url": "ARTICLE_URL"}' | python3 scripts/read_clipped.py`
+
+### 3. 操作与状态 (Action)
+
+- `append_diary(content)`: 向今日日记追加内容。
+- `set_article_status(note_idx, status)`: 修改状态 (`inbox`, `later`, `archive`)。
+- `trash_article(note_idx)`: 将文章移入回收站。
+- `update_article_note(note_idx, note)`: 更新页面笔记/感悟。
+
+## 📋 响应解析规则
+
+- **成功判定**: 脚本返回 JSON 且 `code == 1`。请提取并处理 `data` 字段。
+- **失败判定**: `code != 1` 时，必须读取 `message` 并直接反馈给用户。
+
+## ⚠️ 动态引导约束 (Dynamic Guidance)
+
+- **链接一致性**: 引导用户获取 Token 时，必须匹配当前 `$WUCAI_REGION`。
+- **强制检查**: 输出链接前，必须查阅 `api-details.md` 获取对应区域的 OpenAPI 页面地址。**严禁**在海外模式下给出中文站链接。
+
+## 🔒 异常处理
+
+- **Code 10401**: 权限受限，根据区域引导至对应的会员中心。
+- **Token 缺失**: 引导用户前往相应区域的 **OpenAPI 页面** 拷贝 OpenClaw Token。

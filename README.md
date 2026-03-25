@@ -1,87 +1,76 @@
-# 五彩 Skill
+# 五彩 (WuCai / WuCai Highlight) Skill for OpenClaw
 
-[![License: MIT-0](https://img.shields.io/badge/License-MIT--0-blue.svg)](https://opensource.org/licenses/MIT-0)
+[](https://opensource.org/licenses/MIT-0)
 
-五彩 - 网页划线高亮批注和剪藏工具
+**五彩 (WuCai)** - 网页划线批注、全文剪藏与个人知识库管理工具。
+**WuCai Highlight** - Web highlighter, annotation, full-text clipping, and personal knowledge base manager.
 
----
+-----
 
-## ✨ 核心能力
+## ✨ 核心能力 (Core Capabilities)
 
-| 能力                         | 说明                                       |
-| ---------------------------- | ------------------------------------------ |
-| **写日记/daily/journal**     | 写下自己的生活、工作、学习等，方便后续查看 |
-| **查看最近的 daily/日记**    | 查看最近的 daily/日记，方便查看            |
-| **查看最近阅读的文章和划线** | 查看最近阅读的文章和划线，方便查看和管理   |
-| **demo**                     | 用来测试五彩 demo                          |
+| 能力 (Capability) | 对应函数 (Function) | 说明 (Description) |
+| :--- | :--- | :--- |
+| **📥 知识流管理** | `list_articles` | 分页浏览文章，支持 `inbox`, `later`, `archive` 状态流转。 |
+| **🔍 全局深度搜索** | `search_articles`, `search_highlights` | **双索引搜索**：精准定位文章标题、笔记内容或划线文本。 |
+| **📖 剪藏原文阅读** | `read_clipped_content` | **[特色]** 自动抓取并读取已剪藏文章的 Markdown 全文进行深度总结。 |
+| **✍️ 灵感随手记** | `append_diary`, `list_diary` | 快速向今日日记追加内容，或按日期范围回顾历史心路。 |
+| **♻️ 整理与维护** | `set_article_status`, `trash_article` | 灵活调整文章分类，或将无用信息移入废纸篓。 |
+| **📝 笔记增强** | `update_article_note` | 随时为文章补充新的阅读评价、感悟或 AI 生成的摘要。 |
 
----
+-----
 
-## 💡 使用场景
+## 🔑 配置指南 (Setup Guide)
 
-### ✏️ 随手记录
+### 1\. 获取 Token (Get Your Token)
 
-**通勤路上想到一个点子**
+请根据你所在的区域，前往 OpenAPI 设置页面获取 **OpenClaw Token**（以 `wct-` 开头）：
 
-> 👤 记一下：支付流程可以加一个进度条，用户等待时不焦虑
->
-> 🤖 已记录，自动打上「产品优化」标签。
+  - **中国/亚洲 (cn)**: [获取 Token](https://marker.dotalk.cn/#/personSetting/openapi)
+  - **欧洲 (eu)**: [Get Token](https://eu.wucainote.com/#/personSetting/openapi)
+  - **美国 (us)**: [Get Token](https://us.wucainote.com/#/personSetting/openapi)
 
----
+### 2\. 在 AI 助手中配置 (Config in AI)
 
-## 📦 安装
+  - **连接 (Connect)**: 告诉 AI 助手 **“帮我配置五彩”** 或 **"Help me configure WuCai"**。
+  - **设置 Token**: 将拷贝的 **OpenClaw Token** 粘贴给 AI 即可完成绑定。
+  - **切换区域 (Switch Region)**: 默认区域为 `cn`。如果您在海外使用，请告知 AI：
+    > *“设置五彩区域为 eu”* 或 *"Set WuCai region to us"*。
+    > **注意**：切换区域后，AI 的回复语言、API 请求域名及报错引导链接将自动同步更新。
 
-### 方式一：通过 ClawHub 安装（推荐）
+-----
+
+## 📦 安装 (Installation)
+
+### 方式一：通过 ClawHub 安装 (Recommended)
 
 ```bash
 clawhub install wucai
 ```
 
-### 方式二：让 AI 助手安装
+### 方式二：让 AI 助手直接安装 (Via AI Agent)
 
-> 帮我安装 五彩 skill，地址是 https://raw.githubusercontent.com/makediff/wucai-openclaw/main/SKILL.md
+> 帮我安装五彩 Skill，地址是 `https://raw.githubusercontent.com/makediff/wucai-openclaw/main/SKILL.md`
 
-### 方式三：手动安装
+-----
 
-```bash
-mkdir -p ~/.openclaw/workspace/skills/wucai
-cd ~/.openclaw/workspace/skills/wucai
-curl -sL https://raw.githubusercontent.com/makediff/wucai-openclaw/main/SKILL.md -o SKILL.md
-curl -sL https://raw.githubusercontent.com/makediff/wucai-openclaw/main/package.json -o package.json
-```
+## 🔐 安全与隐私 (Security & Privacy)
 
----
+  - **隐私隔离**: 笔记和日记是私密数据，AI 仅在您的明确指令下才会读取或搜索相关内容。
+  - **本地执行**: 所有 API 请求通过内置脚本 `scripts/wucai_api.py` 在本地执行，具备 15s 超时保护，确保数据链路安全稳定。
 
-## 🔑 配置
+-----
 
-### 通过后台复制五彩 API TOKEN
+## 📜 相关链接 (Links)
 
-告诉 AI 助手：
+  - **Official Website**: [中文 (cn)](https://doc.wucai.site/) | [Global (eu/us)](https://wucainote.com/)
+  - **Feedback**: [GitHub Issues](https://github.com/makediff/wucai-openclaw/issues)
+  - **License**: MIT-0
 
-> 帮我配置五彩
-详细见 [SKILL.md](SKILL.md#连接五彩) 里的 连接五彩章节
-
----
-
-## 🔐 安全说明
-
-> ⚠️ **隐私保护**：笔记是你的私密数据，AI 会严格校验身份。
-
-- 配置 `WUCAI_API_TOKEN` 后，只有你能操作笔记
-- 群聊中其他人无法通过 AI 读取你的笔记
-- **不要在聊天中发送 WUCAI_API_TOKEN**，请手动配置到环境变量
-
----
-
-## 📜 相关链接
-
-- [五彩官网](https://doc.wucai.site/about/wucai.html)
-- [五彩官网 - 欧洲和美国区域](https://wucainote.com/about/wucai.html)
-- [ClawHub](https://clawhub.ai/iswalle/wucai)
-- [开通会员](https://marker.dotalk.cn/#/personSetting/membership)
-
----
+-----
 
 ## License
 
 MIT-0 (MIT No Attribution) · Published on [ClawHub](https://clawhub.ai)
+
+-----

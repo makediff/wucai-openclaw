@@ -1,7 +1,7 @@
 {
   "name": "wucai-openclaw",
-  "version": "26.3.24",
-  "description": "让 AI 帮你保存和管理 五彩",
+  "version": "26.3.33",
+  "description": "五彩 AI 助手：集成网页划线批注、全文剪藏阅读与个人日记管理，打造你的 AI 知识大脑。",
   "license": "MIT-0",
   "author": "makediff@gmail.com",
   "homepage": "https://doc.wucai.site",
@@ -17,8 +17,11 @@
     "五彩",
     "highlight",
     "notes",
+    "clipping",
+    "diary",
     "笔记",
     "知识库",
+    "剪藏",
     "ai",
     "openclaw",
     "skill"
@@ -29,6 +32,7 @@
   "openclaw": {
     "minVersion": "0.1.0",
     "primaryEnv": "WUCAI_API_TOKEN",
+    "homepage_en": "https://wucainote.com",
     "requires": {},
     "optionalEnv": []
   }
