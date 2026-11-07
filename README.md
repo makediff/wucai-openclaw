@@ -1,8 +1,8 @@
 # 五彩 (WuCai / WuCai Highlight) Skill for OpenClaw
 
-[](https://www.google.com/search?q=%5Bhttps://opensource.org/licenses/MIT-0%5D\(https://opensource.org/licenses/MIT-0\))
+[![License: MIT-0](https://img.shields.io/badge/License-MIT--0-brightgreen.svg)](https://opensource.org/licenses/MIT-0)
 
-**五彩 (WuCai)** - 专业的网页划线批注、全文剪藏与个人知识库管理工具。  
+**五彩 (WuCai)** - 专业的网页划线批注、全文剪藏与个人知识库管理工具。
 **WuCai Highlight** - Web highlighter, annotation, full-text clipping, and personal knowledge base manager.
 
 -----
@@ -52,7 +52,7 @@ AI 会根据区域回复您对应的获取链接。您也可以手动访问（�
 ### 第三步：绑定与验证 (Bind & Verify)
 
 1.  将拷贝的 Token 发送给 AI 完成绑定。
-2.  **验证连接**：发送指令 `“看看今天的五彩划线”`。如果 AI 能够正常读出内容，即表示配置成功！
+2.  **验证连接**：发送指令 `"看看今天的五彩划线"`。如果 AI 能够正常读出内容，即表示配置成功！
 
 -----
 
@@ -71,8 +71,8 @@ AI 会根据区域回复您对应的获取链接。您也可以手动访问（�
 ## 📋 常见问题 (FAQ)
 
   - **为什么提示 Token 无效？** 请确认 Token 是否以 `wct-` 开头。如果是从普通 API 页面拷贝的 Key 将无法在 OpenClaw 中使用。
-  - **搜不到较早之前的划线？** 出于性能与隐私平衡，单次查询的最大时间跨度限制为 **14 天**。如需查询更久之前的内容，请指定具体日期（如：“看下 2025-11-20 的划线”）。
-  - **区域设置错了怎么办？** 随时对 AI 说 `“将五彩区域切换为 eu”`（或 cn/us），AI 会自动更新请求域名并引导您重新获取该区域的 Token。
+  - **搜不到较早之前的划线？** 出于性能与隐私平衡，单次查询的最大时间跨度限制为 **14 天**。如需查询更久之前的内容，请指定具体日期（如："看下 2025-11-20 的划线"）。
+  - **区域设置错了怎么办？** 随时对 AI 说 `"将五彩区域切换为 eu"`（或 cn/us），AI 会自动更新请求域名并引导您重新获取该区域的 Token。
 
 -----
 
@@ -87,7 +87,7 @@ AI 会根据区域回复您对应的获取链接。您也可以手动访问（�
 ## 📜 相关链接 (Links)
 
   - **官方网站 (Official)**:
-      - 中文: [https://doc.wucai.site/](https://doc.wucai.site/)
+      - 中文: [https://wucainote.com/docs/](https://wucainote.com/docs/)
       - Global: [https://wucainote.com/](https://wucainote.com/)
   - **问题反馈 (Feedback)**: [https://github.com/makediff/wucai-openclaw/issues](https://github.com/makediff/wucai-openclaw/issues)
   - **许可证 (License)**: MIT-0

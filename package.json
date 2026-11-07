@@ -1,10 +1,10 @@
 {
   "name": "wucai-openclaw",
-  "version": "26.3.37",
+  "version": "26.3.52",
   "description": "五彩 AI 助手：集成网页划线批注、全文剪藏阅读与个人日记管理，打造你的 AI 知识大脑。",
   "license": "MIT-0",
   "author": "makediff@gmail.com",
-  "homepage": "https://doc.wucai.site",
+  "homepage": "https://wucainote.com/docs/",
   "repository": {
     "type": "git",
     "url": "https://github.com/makediff/wucai-openclaw.git"

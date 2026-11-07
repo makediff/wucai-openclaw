@@ -54,16 +54,30 @@
 
 | 错误码 (Code) | 场景 (Scenario) | AI 引导话术 (CN / EN) |
 | :--- | :--- | :--- |
-| **10104** | 系统维护 / 降级 | “五彩系统当前正在维护或处于降级模式，请稍后再试。” / "WuCai system is under maintenance." |
-| **10035** | **范围/日期错误** | “查询跨度不能超过 14 天或日期格式有误。” / "Search range cannot exceed 14 days or invalid format." |
-| **10404** | **内容不存在** | “未找到相关记录，请确认链接或区域 ($WUCAI_REGION) 是否正确。” / "No records found. Check URL or Region." |
-| **10401** | 会员受限 | “此功能仅限五彩会员使用，请前往[会员中心]。” / "This feature requires VIP membership." |
-| **10010 / 10016** | Token 失效 | “Token 已失效，请重新获取并配置。” / "Token expired. Please refresh your API Token." |
+| **-1** | 网络错误/服务端异常 | “网络连接失败或服务器异常，请稍后重试。” / “Network or server error. Please retry.” |
 | **10000** | 业务通用异常 | 直接展示返回的 `message` 内容。 |
+| **10010 / 10016** | Token 缺失/失效 | “Token 已失效或无效，请重新获取并配置。” / “Token expired or invalid. Please refresh your API Token.” |
+| **10035** | 范围/日期错误 | “查询跨度不能超过 14 天或日期格式有误。” / “Search range cannot exceed 14 days or invalid format.” |
+| **10104** | 系统维护 / 降级 | “五彩系统当前正在维护或处于降级模式，请稍后再试。” / “WuCai system is under maintenance.” |
+| **10401** | 会员受限 | “此功能仅限五彩会员使用，请前往[会员中心]。” / “This feature requires VIP membership.” |
+| **10404** | 内容不存在 | “未找到相关记录。请检查链接或区域 ($WUCAI_REGION) 是否正确。” / “No records found. Please check URL or Region.” |
 
 ---
 
-## 5. 翻页与性能约束 (Pagination & Performance)
+## 5. 接口参数详情 (Endpoint Parameters)
+
+### list_highlights
+- `range`: 时间范围 (默认 `today`)
+- `cursor`: 游标 (默认 `""`)
+- `page_size`: 每页数量 (默认 `12`)
+- `type`: 过滤类型 (int, 默认 `0`)
+  - `0`: 全部 (All)
+  - `1`: 仅文章 (Article)
+  - `3`: 仅日记 (Daily)
+
+---
+
+## 6. 翻页与性能约束 (Pagination & Performance)
 - **14 天硬限制**: 无论使用快捷键还是自定义区间，总时间跨度不得超过 14 天。
 - **游标翻页**: 列表接口返回 `next_cursor`。若用户请求更多内容，将该值填入下一次请求的 `cursor` 字段。
 - **速率限制**: 批量拉取建议 `page_size` 设置在 12-30 之间。
